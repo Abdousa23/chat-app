@@ -49,8 +49,7 @@ app.use('/api', router);
 //         } catch (error) {
 //             console.error(`Failed to add message: ${error}`)
 //         }
-//     })
-
+//     
 // })
 // const addingMessage = async (data) => {
 //     try {
