@@ -46,11 +46,10 @@ const userSchema = new schema({
         minlength: 8,
         // match : /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/
     },
-    phonenumber: {
-        type: String,///make it an Array later
+    rooms: {
+        type: [schema.Types.ObjectId],
+        ref: 'Room',
         required: false,
-        default: "",
-
     },
     refreshToken: {
         type: String,

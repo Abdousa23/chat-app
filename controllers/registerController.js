@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     const { firstname, lastname, username, email, password, role, phonenumber } = req.body
-    if (!username || !email || !password || !role || !firstname || !lastname) {
+    if (!username || !email || !password || !firstname || !lastname) {
         return res.status(400).json({ 'message': "All fields are required" })
     }
     try {
@@ -16,17 +16,11 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(req.body.password, salt);
         var roles = {
-            User: 0,
+            User: 2000,
             Admin: 0,
             Editor: 0,
             School: 0
         }
-        if (role == "school") {
-            roles = { School: 3000 };
-        } else if (role == "user") {
-            roles = { User: 2000 };
-        }
-        var phone = phonenumber || ""
         const newUser = new User({
             username: req.body.username,
             firstname: req.body.firstname,
@@ -34,7 +28,6 @@ const register = async (req, res) => {
             email: req.body.email,
             password: hashedPass,
             roles: roles,
-            phonenumber: phone
         })
 
         const user = await newUser.save();
